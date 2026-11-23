@@ -3,10 +3,12 @@
     "subscribers": 2300,
     "views": 1497755,
     "videos": 82,
-    "watchHours": 11140,
+    "watchHours": 2242,
     "shortsViews90d": 1423179,
     "updated": "2026-11-24",
-    "note": "Часы и Shorts — по OAuth, обновляются каждые 30 минут"
+    "note": "Часы и Shorts — по OAuth, обновляются каждые 30 минут",
+    "watchHoursTotal": 11141,
+    "shortsWatchHours": 8899
   },
   "vk": {
     "subscribers": 2483,
