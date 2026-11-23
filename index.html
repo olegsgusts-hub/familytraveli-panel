@@ -429,10 +429,10 @@
           <div class="sub">из 500 → 432%</div>
           <div class="bar"><i></i></div>
         </div>
-        <div class="metric warn tap" data-detail="yt" role="button" tabindex="0">
+        <div class="metric ok tap" data-detail="yt" role="button" tabindex="0">
           <div class="label">YouTube · год</div>
-          <div class="val">2 190 ч</div>
-          <div class="sub">из 4 000 → 55%</div>
+          <div class="val">11 140 ч</div>
+          <div class="sub">из 4 000 → 278%</div>
           <div class="bar"><i></i></div>
         </div>
         <div class="metric viral tap" data-detail="best" role="button" tabindex="0">
@@ -469,17 +469,18 @@
         <div class="stat"><span>Подписчики</span><b id="ytSubs">2 300</b><small>порог 1 000 пройден</small></div>
         <div class="stat"><span>Просмотры</span><b id="ytViews">1 497 755</b><small>всего на канале</small></div>
         <div class="stat"><span>Видео</span><b id="ytVideos">82</b><small>включая Shorts</small></div>
-        <div class="stat"><span>Часы за год</span><b id="ytHours">2 190</b><small>из Studio · порог 4 000</small></div>
+        <div class="stat"><span>Часы за год</span><b id="ytHours">11 140</b><small>порог 4 000 пройден</small></div>
+        <div class="stat"><span>Shorts · 90 дней</span><b id="ytShorts">1 423 179</b><small>просмотры · OAuth</small></div>
       </div>
       <button class="refresh yt" id="ytRefresh">Обновить с YouTube</button>
-      <div class="source" id="ytSource">Данные на 23.11.2026. Публичные цифры — по API, часы — из выгрузки.</div>
+      <div class="source" id="ytSource">Данные на 24.11.2026. Публичные цифры — по API, часы и Shorts — по OAuth.</div>
       <div class="link-row">
         <button class="link-btn api-cfg" type="button">Настроить API</button>
         <a class="link-btn" href="https://studio.youtube.com/" target="_blank" rel="noopener">YouTube Studio</a>
       </div>
       <div class="card">
-        <h3>Что не отдаётся публично</h3>
-        <div class="muted">Часы просмотра и просмотры Shorts за 90 дней видны только в YouTube Studio. Их можно обновлять выгрузкой CSV или через OAuth-сервер.</div>
+        <h3>Аналитика обновляется сама</h3>
+        <div class="muted">Часы за 365 дней и Shorts за 90 дней подтягиваются по OAuth каждые 30 минут. Публичные цифры — по API-ключу, приватные — по вашему разрешению.</div>
       </div>
     </section>
 
@@ -717,13 +718,13 @@
     },
     yt: {
       kicker: 'YouTube',
-      title: '2 190 из 4 000 часов',
+      title: '11 140 из 4 000 часов',
       body: `
-        <div class="meta"><span>разрыв 1 810 ч</span><span>69 дней</span><span>26,2 ч/день</span></div>
-        <p><b>Почему не успеваем:</b> сейчас темп 6 часов в день, нужно 26,2 — ускорение в 4,4 раза. После 1 февраля планка станет 8 000 часов.</p>
-        <p><b>Оставшийся рычаг:</b> Shorts. Порог — 10 млн просмотров за 90 дней. При лучшем ролике 1,1 млн нужно ~9 таких хитов. Вирусность не гарантирована.</p>
-        <p><b>Вывод:</b> YouTube — витрина и портфолио для брендов, а не источник дохода в этом сезоне.</p>
-        <div class="humor">Мы не проиграли. Мы просто выбрали платформу, которая платит, а не ту, которая красиво молчит.</div>`
+        <div class="meta"><span>порог пройден</span><span>+7 140 ч</span><span>8 000 после 1 февраля тоже пройден</span></div>
+        <p><b>Порог пройден:</b> 11 140 часов за 365 дней — это 2,8× от 4 000. Даже новая планка 8 000 с 1 февраля 2027 года пройдена.</p>
+        <p><b>Shorts:</b> 1 423 179 просмотров за 90 дней. До 10 млн далеко, но для заявки в партнёрскую программу хватает часов.</p>
+        <p><b>Что делать:</b> проверить доступность партнёрской программы и AdSense для выплат, подать заявку. Shorts — отдельный рычаг роста.</p>
+        <div class="humor">Мы год думали, что не догоняем. Оказалось, догнали ещё в прошлом сезоне — просто считали не те цифры.</div>`
     },
     best: {
       kicker: 'Лучший ролик',
@@ -750,7 +751,7 @@
       title: 'Куда смотреть в этом сезоне',
       body: `
         <p><b>VK — деньги уже доступны.</b> Порог пройден, заявка — на этой неделе.</p>
-        <p><b>YouTube — портфолио и Shorts.</b> Часы не догоняем, но один вирусный ролик может изменить картину.</p>
+        <p><b>YouTube — часы пройдены.</b> 11 140 часов дают право на заявку в YPP; Shorts 1,42 млн за 90 дней — отдельный рычаг.</p>
         <p><b>Бренды — главный доход.</b> 5 питчей, медиакит, по одному письму в день.</p>
         <div class="humor">Стратегия простая: не ждать, пока платформа заметит, а идти туда, где уже платят.</div>`
     }
@@ -838,6 +839,7 @@
         if (s.youtube.views != null) document.getElementById('ytViews').textContent = fmt(s.youtube.views);
         if (s.youtube.videos != null) document.getElementById('ytVideos').textContent = fmt(s.youtube.videos);
         if (s.youtube.watchHours != null) document.getElementById('ytHours').textContent = fmt(s.youtube.watchHours);
+        if (s.youtube.shortsViews90d != null) document.getElementById('ytShorts').textContent = fmt(s.youtube.shortsViews90d);
       }
       if (s.vk) {
         if (s.vk.subscribers != null && !localStorage.getItem('vkCache')) document.getElementById('vkSubs').textContent = fmt(s.vk.subscribers);
@@ -854,6 +856,7 @@
           if (c.subs != null) document.getElementById('ytSubs').textContent = fmt(c.subs);
           if (c.views != null) document.getElementById('ytViews').textContent = fmt(c.views);
           if (c.videos != null) document.getElementById('ytVideos').textContent = fmt(c.videos);
+          if (c.shorts != null) document.getElementById('ytShorts').textContent = fmt(c.shorts);
           setSource('ytSource', 'Обновлено ' + c.at + ' · YouTube API');
         } else {
           if (c.subs != null) document.getElementById('vkSubs').textContent = fmt(c.subs);
@@ -882,7 +885,8 @@
       document.getElementById('ytViews').textContent = fmt(s.viewCount);
       document.getElementById('ytVideos').textContent = fmt(s.videoCount);
       localStorage.setItem('ytCacheV2', JSON.stringify({ subs: s.subscriberCount, views: s.viewCount, videos: s.videoCount, at: nowText() }));
-      setSource('ytSource', 'Обновлено ' + nowText() + ' · YouTube API · часы — из Studio');
+      await loadStats();
+      setSource('ytSource', 'Обновлено ' + nowText() + ' · YouTube API · часы и Shorts — OAuth');
     } catch (e) {
       setSource('ytSource', 'Не удалось обновить: ' + e.message + '. Показаны последние данные.');
     }
