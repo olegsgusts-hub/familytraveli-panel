@@ -1064,8 +1064,26 @@
 
   const initial = location.hash.replace('#', '');
   const initialTab = document.querySelector('.tab[data-tab="' + initial + '"]');
-  if (initialTab) setTimeout(() => initialTab.click(), 100);
-  else if (initial && D[initial]) setTimeout(() => openDetail(initial), 150);
+  if (initial === 'settings') {
+    setTimeout(openSettings, 400);
+  } else if (initial.indexOf('ad-') === 0) {
+    const adId = initial.slice(3);
+    let adTries = 0;
+    const openByHash = () => {
+      if (ADS.length) {
+        const t = document.querySelector('.tab[data-tab="ads"]');
+        if (t) t.click();
+        setTimeout(() => openAd(adId), 120);
+      } else if (adTries++ < 15) {
+        setTimeout(openByHash, 300);
+      }
+    };
+    setTimeout(openByHash, 300);
+  } else if (initialTab) {
+    setTimeout(() => initialTab.click(), 100);
+  } else if (initial && D[initial]) {
+    setTimeout(() => openDetail(initial), 150);
+  }
 </script>
 </body>
 </html>
