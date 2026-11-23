@@ -223,6 +223,73 @@
     .grid{grid-template-columns:1fr 1fr}.metric:nth-child(3){grid-column:span 2}
     .metric .val{font-size:17px}
   }
+  /* вкладки-скролл и бренды */
+  .tabs.scroll{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;padding-bottom:8px}
+  .tabs.scroll::-webkit-scrollbar{display:none}
+  .tabs.scroll .tab{flex:0 0 auto;display:flex;align-items:center;gap:5px;padding:9px 11px;font-size:12.5px}
+  .tabs .tab .logo{width:16px;height:16px;flex:none;display:block}
+  .tabs .tab.yt.active{background:linear-gradient(120deg,#FF0000,#FF4D4D);color:#fff;border-color:transparent}
+  .tabs .tab.vk.active{background:linear-gradient(120deg,#0077FF,#4DA3FF);color:#fff;border-color:transparent}
+  .tabs .tab.ads.active{background:linear-gradient(120deg,#7C3AED,#A78BFA);color:#fff;border-color:transparent}
+  .brand-head{display:flex;align-items:center;gap:12px;border-radius:20px;padding:16px;color:#fff;margin-bottom:11px;box-shadow:var(--shadow)}
+  .brand-head.yt{background:linear-gradient(135deg,#FF0000,#B30000)}
+  .brand-head.vk{background:linear-gradient(135deg,#0077FF,#0047B3)}
+  .brand-head.ads{background:linear-gradient(135deg,#7C3AED,#4C1D95)}
+  .brand-head .logo{width:46px;height:46px;border-radius:13px;background:#fff;display:grid;place-items:center;flex:none}
+  .brand-head h2{font-size:20px;margin:0;color:#fff;padding:0}
+  .brand-head p{font-size:12px;margin:3px 0 0;color:rgba(255,255,255,.9)}
+  .brand-head .open{margin-left:auto;font-size:11px;font-weight:700;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.5);padding:6px 9px;border-radius:99px;white-space:nowrap}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:10px}
+  .stat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:var(--shadow)}
+  .stat span{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+  .stat b{display:block;font-size:22px;margin-top:4px;letter-spacing:-.4px}
+  .stat small{display:block;font-size:11px;color:var(--muted);margin-top:4px;line-height:1.35}
+  .refresh{width:100%;padding:14px;border-radius:15px;border:0;font-weight:800;cursor:pointer;margin-bottom:8px;font-size:14.5px}
+  .refresh.yt{background:linear-gradient(120deg,#FF0000,#FF4D4D);color:#fff}
+  .refresh.vk{background:linear-gradient(120deg,#0077FF,#4DA3FF);color:#fff}
+  .refresh.ads{background:linear-gradient(120deg,#7C3AED,#A78BFA);color:#fff}
+  .refresh.ghost{background:var(--surface);color:var(--text);border:1px solid var(--line)}
+  .source{font-size:11px;color:var(--muted);text-align:center;margin-bottom:12px;line-height:1.4}
+  .link-row{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}
+  .link-btn{font-size:12px;font-weight:700;text-decoration:none;padding:8px 11px;border-radius:10px;background:var(--surface);border:1px solid var(--line);color:var(--text);cursor:pointer}
+  .ads-summary{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+  .ads-pill{font-size:11px;padding:5px 9px;border-radius:99px;font-weight:700;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+  .ads-pill.new{background:#F1F2F4;color:#5B6470}
+  .ads-pill.work{background:#E6F0FF;color:#1F5FBF}
+  .ads-pill.waiting{background:#FFF3D6;color:#9A6A00}
+  .ads-pill.refused{background:#FFE6E6;color:#B3261E}
+  .ads-pill.agreed{background:#E4F6EF;color:#1F7A5C}
+  .ad-card{background:var(--surface);border:1px solid var(--line);border-left:5px solid #9CA3AF;border-radius:16px;padding:13px;margin-bottom:9px;box-shadow:var(--shadow);cursor:pointer}
+  .ad-card[data-status="work"]{border-left-color:#1F5FBF}
+  .ad-card[data-status="waiting"]{border-left-color:#D98A1C}
+  .ad-card[data-status="refused"]{border-left-color:#B3261E}
+  .ad-card[data-status="agreed"]{border-left-color:#1F7A5C}
+  .ad-card .ad-top{display:flex;align-items:flex-start;gap:8px}
+  .ad-card .ad-name{font-size:16px;font-weight:800;flex:1;line-height:1.25}
+  .ad-status{font-size:10px;font-weight:800;padding:4px 8px;border-radius:99px;white-space:nowrap}
+  .ad-status.new{background:#F1F2F4;color:#5B6470}
+  .ad-status.work{background:#E6F0FF;color:#1F5FBF}
+  .ad-status.waiting{background:#FFF3D6;color:#9A6A00}
+  .ad-status.refused{background:#FFE6E6;color:#B3261E}
+  .ad-status.agreed{background:#E4F6EF;color:#1F7A5C}
+  .ad-card .ad-meta{font-size:12.5px;color:var(--muted);margin-top:3px}
+  .ad-card .ad-contact{font-size:12.5px;margin-top:7px;color:var(--text);word-break:break-word}
+  .ad-card .ad-note{font-size:11.5px;color:var(--muted);margin-top:5px}
+  .status-btns{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:11px 0}
+  .status-btns button{font-size:12px;font-weight:700;padding:9px 6px;border-radius:10px;border:1px solid var(--line);background:var(--surface2);color:var(--text);cursor:pointer}
+  .status-btns button.active{outline:2px solid var(--accent);outline-offset:1px}
+  .status-btns button[data-s="work"].active{background:#E6F0FF;color:#1F5FBF}
+  .status-btns button[data-s="waiting"].active{background:#FFF3D6;color:#9A6A00}
+  .status-btns button[data-s="refused"].active{background:#FFE6E6;color:#B3261E}
+  .status-btns button[data-s="agreed"].active{background:#E4F6EF;color:#1F7A5C}
+  .note{width:100%;min-height:74px;border:1px solid var(--line);border-radius:12px;padding:10px;font:inherit;font-size:14px;background:var(--surface2);color:var(--text);resize:vertical}
+  .history{font-size:12.5px;color:var(--muted);border-left:2px solid var(--line);padding-left:11px;margin-top:12px}
+  .history div{margin-bottom:7px;line-height:1.45}
+  .history b{color:var(--text)}
+  .cfg-row{margin-bottom:11px}
+  .cfg-row label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:5px}
+  .cfg-row input{width:100%;padding:11px;border:1px solid var(--line);border-radius:11px;background:var(--surface2);color:var(--text);font:inherit;font-size:14px}
+  .hint{font-size:11.5px;color:var(--muted);line-height:1.45;margin:8px 0}
 </style>
 </head>
 <body>
@@ -259,10 +326,22 @@
     <button id="jokeBtn" aria-label="Другая шутка">↻</button>
   </div>
 
-  <nav class="tabs">
+  <nav class="tabs scroll">
     <button class="tab active" data-tab="today">Сегодня</button>
     <button class="tab" data-tab="plan">План</button>
     <button class="tab" data-tab="metrics">Цифры</button>
+    <button class="tab yt" data-tab="youtube">
+      <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="4.5" width="22" height="15" rx="4" fill="#FF0000"/><path d="M10 9l6 3-6 3z" fill="#fff"/></svg>
+      YouTube
+    </button>
+    <button class="tab vk" data-tab="vk">
+      <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="6" fill="#0077FF"/><text x="12" y="16" text-anchor="middle" font-size="9" font-weight="800" fill="#fff" font-family="Arial,sans-serif">VK</text></svg>
+      VK
+    </button>
+    <button class="tab ads" data-tab="ads">
+      <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="6" fill="#7C3AED"/><text x="12" y="16" text-anchor="middle" font-size="12" font-weight="800" fill="#fff" font-family="Arial,sans-serif">₽</text></svg>
+      Реклама
+    </button>
   </nav>
 
   <main>
@@ -366,6 +445,84 @@
         <div class="row">
           <div class="ico">🤝</div>
           <div class="t"><b>2–3 бренд-сделки в месяц</b><small>10–20 тыс. ₽ за интеграцию. Это реальный доход, а не 400 ₽ квартальной выплаты VK.</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- YOUTUBE -->
+    <section class="panel" id="youtube">
+      <div class="brand-head yt">
+        <div class="logo">
+          <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="4.5" width="22" height="15" rx="4" fill="#FF0000"/><path d="M10 9l6 3-6 3z" fill="#fff"/></svg>
+        </div>
+        <div><h2>YouTube</h2><p>@FamilyTraveli</p></div>
+        <a class="open" href="https://www.youtube.com/@FamilyTraveli" target="_blank" rel="noopener">Открыть</a>
+      </div>
+      <div class="stat-grid">
+        <div class="stat"><span>Подписчики</span><b id="ytSubs">2 290</b><small>порог 1 000 пройден</small></div>
+        <div class="stat"><span>Просмотры</span><b id="ytViews">—</b><small>всего на канале</small></div>
+        <div class="stat"><span>Видео</span><b id="ytVideos">83</b><small>включая Shorts</small></div>
+        <div class="stat"><span>Часы за год</span><b id="ytHours">2 190</b><small>из Studio · порог 4 000</small></div>
+      </div>
+      <button class="refresh yt" id="ytRefresh">Обновить с YouTube</button>
+      <div class="source" id="ytSource">Данные на 23.11.2026. Публичные цифры — по API, часы — из выгрузки.</div>
+      <div class="link-row">
+        <button class="link-btn api-cfg" type="button">Настроить API</button>
+        <a class="link-btn" href="https://studio.youtube.com/" target="_blank" rel="noopener">YouTube Studio</a>
+      </div>
+      <div class="card">
+        <h3>Что не отдаётся публично</h3>
+        <div class="muted">Часы просмотра и просмотры Shorts за 90 дней видны только в YouTube Studio. Их можно обновлять выгрузкой CSV или через OAuth-сервер.</div>
+      </div>
+    </section>
+
+    <!-- VK -->
+    <section class="panel" id="vk">
+      <div class="brand-head vk">
+        <div class="logo">
+          <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="6" fill="#0077FF"/><text x="12" y="16" text-anchor="middle" font-size="9" font-weight="800" fill="#fff" font-family="Arial,sans-serif">VK</text></svg>
+        </div>
+        <div><h2>ВКонтакте</h2><p>@familytraveli</p></div>
+        <a class="open" href="https://vkvideo.ru/@familytraveli" target="_blank" rel="noopener">Открыть</a>
+      </div>
+      <div class="stat-grid">
+        <div class="stat"><span>Подписчики</span><b id="vkSubs">2 483</b><small>порог 1 000 пройден</small></div>
+        <div class="stat"><span>Просмотры</span><b id="vkViews">—</b><small>всего</small></div>
+        <div class="stat"><span>Видео</span><b id="vkVideos">—</b><small>ролики и клипы</small></div>
+        <div class="stat"><span>Часы за 90 дней</span><b id="vkHours">2 160</b><small>из VK Studio · порог 500</small></div>
+      </div>
+      <button class="refresh vk" id="vkRefresh">Обновить из VK</button>
+      <div class="source" id="vkSource">Данные на 23.11.2026. Подписчики — по API, часы — из выгрузки.</div>
+      <div class="link-row">
+        <button class="link-btn api-cfg" type="button">Настроить API</button>
+        <a class="link-btn" href="https://vk.com/familytraveli" target="_blank" rel="noopener">Сообщество VK</a>
+      </div>
+      <div class="card">
+        <h3>Партнёрская программа</h3>
+        <div class="muted">Порог пройден: 1 000 подписчиков и 500 часов за 90 дней. Заявка — в приоритете на этой неделе.</div>
+      </div>
+    </section>
+
+    <!-- РЕКЛАМА -->
+    <section class="panel" id="ads">
+      <div class="brand-head ads">
+        <div class="logo">
+          <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="6" fill="#7C3AED"/><text x="12" y="16" text-anchor="middle" font-size="12" font-weight="800" fill="#fff" font-family="Arial,sans-serif">₽</text></svg>
+        </div>
+        <div><h2>Реклама</h2><p>5 проверенных + 2 в поиске</p></div>
+      </div>
+      <div class="ads-summary" id="adsSummary"></div>
+      <div id="adsList"></div>
+      <button class="refresh ghost" id="adsExport" type="button">Экспорт истории в JSON</button>
+      <div class="source">Статусы, заметки и история хранятся в этом браузере. Экспорт — чтобы не потерять.</div>
+      <div class="card">
+        <h3>Где искать ещё</h3>
+        <div class="muted">Проверенные площадки для поиска рекламодателей и бартера:</div>
+        <div class="link-row">
+          <a class="link-btn" href="https://vk.com/search?c%5Bq%5D=%D1%81%D0%BE%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%BE%20%D0%B1%D0%BB%D0%BE%D0%B3%D0%B5%D1%80%D1%8B&c%5Bsection%5D=communities" target="_blank" rel="noopener">VK</a>
+          <a class="link-btn" href="https://tgstat.ru/search?q=%D1%81%D0%B5%D0%BC%D0%B5%D0%B9%D0%BD%D1%8B%D0%B9%20%D1%82%D1%83%D1%80%D0%B8%D0%B7%D0%BC" target="_blank" rel="noopener">Telegram</a>
+          <a class="link-btn" href="https://www.tiktok.com/search?q=%D1%81%D0%B5%D0%BC%D0%B5%D0%B9%D0%BD%D1%8B%D0%B9%20%D0%BE%D1%82%D0%B5%D0%BB%D1%8C" target="_blank" rel="noopener">TikTok</a>
+          <a class="link-btn" href="https://yandex.ru/search/?text=%D0%BE%D1%82%D0%B5%D0%BB%D1%8C%20%D1%81%D0%BE%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%BE%20%D1%81%20%D0%B1%D0%BB%D0%BE%D0%B3%D0%B5%D1%80%D0%B0%D0%BC%D0%B8" target="_blank" rel="noopener">Сайты</a>
         </div>
       </div>
     </section>
@@ -655,8 +812,247 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }));
 
+  /* ---------- статистика каналов ---------- */
+  function fmt(n) { return (n === null || n === undefined || n === '') ? '—' : Number(n).toLocaleString('ru-RU'); }
+  function setSource(id, text) { const el = document.getElementById(id); if (el) el.textContent = text; }
+  function nowText() { return new Date().toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }); }
+  function getApi() { try { return JSON.parse(localStorage.getItem('panelApiV1') || '{}'); } catch (e) { return {}; } }
+  function saveApi(v) { try { localStorage.setItem('panelApiV1', JSON.stringify(v)); } catch (e) {} }
+
+  async function loadStats() {
+    try {
+      const r = await fetch('stats.json?t=' + Date.now(), { cache: 'no-store' });
+      if (!r.ok) return;
+      const s = await r.json();
+      if (s.youtube) {
+        if (s.youtube.subscribers != null && !localStorage.getItem('ytCache')) document.getElementById('ytSubs').textContent = fmt(s.youtube.subscribers);
+        if (s.youtube.views != null) document.getElementById('ytViews').textContent = fmt(s.youtube.views);
+        if (s.youtube.videos != null) document.getElementById('ytVideos').textContent = fmt(s.youtube.videos);
+        if (s.youtube.watchHours != null) document.getElementById('ytHours').textContent = fmt(s.youtube.watchHours);
+      }
+      if (s.vk) {
+        if (s.vk.subscribers != null && !localStorage.getItem('vkCache')) document.getElementById('vkSubs').textContent = fmt(s.vk.subscribers);
+        if (s.vk.views != null) document.getElementById('vkViews').textContent = fmt(s.vk.views);
+        if (s.vk.videos != null) document.getElementById('vkVideos').textContent = fmt(s.vk.videos);
+        if (s.vk.watchHours90d != null) document.getElementById('vkHours').textContent = fmt(s.vk.watchHours90d);
+      }
+    } catch (e) {}
+    ['yt', 'vk'].forEach(k => {
+      try {
+        const c = JSON.parse(localStorage.getItem(k + 'Cache') || 'null');
+        if (!c) return;
+        if (k === 'yt') {
+          if (c.subs != null) document.getElementById('ytSubs').textContent = fmt(c.subs);
+          if (c.views != null) document.getElementById('ytViews').textContent = fmt(c.views);
+          if (c.videos != null) document.getElementById('ytVideos').textContent = fmt(c.videos);
+          setSource('ytSource', 'Обновлено ' + c.at + ' · YouTube API');
+        } else {
+          if (c.subs != null) document.getElementById('vkSubs').textContent = fmt(c.subs);
+          if (c.videos != null) document.getElementById('vkVideos').textContent = fmt(c.videos);
+          setSource('vkSource', 'Обновлено ' + c.at + ' · VK API');
+        }
+      } catch (e) {}
+    });
+  }
+
+  async function refreshYT() {
+    const cfg = getApi();
+    if (!cfg.ytKey || !cfg.ytId) {
+      setSource('ytSource', 'Нужен API-ключ. Нажмите «Настроить API».');
+      openSettings();
+      return;
+    }
+    setSource('ytSource', 'Обновляю с YouTube…');
+    try {
+      const url = 'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=' + encodeURIComponent(cfg.ytId) + '&key=' + encodeURIComponent(cfg.ytKey);
+      const r = await fetch(url);
+      const j = await r.json();
+      if (!j.items || !j.items[0]) throw new Error((j.error && j.error.message) || 'нет данных');
+      const s = j.items[0].statistics;
+      document.getElementById('ytSubs').textContent = fmt(s.subscriberCount);
+      document.getElementById('ytViews').textContent = fmt(s.viewCount);
+      document.getElementById('ytVideos').textContent = fmt(s.videoCount);
+      localStorage.setItem('ytCache', JSON.stringify({ subs: s.subscriberCount, views: s.viewCount, videos: s.videoCount, at: nowText() }));
+      setSource('ytSource', 'Обновлено ' + nowText() + ' · YouTube API · часы — из Studio');
+    } catch (e) {
+      setSource('ytSource', 'Не удалось обновить: ' + e.message + '. Показаны последние данные.');
+    }
+  }
+
+  function vkJsonp(params) {
+    return new Promise((resolve, reject) => {
+      const cb = 'vkcb_' + Math.random().toString(36).slice(2);
+      const s = document.createElement('script');
+      const timer = setTimeout(() => { cleanup(); reject(new Error('таймаут VK')); }, 12000);
+      function cleanup() { clearTimeout(timer); try { delete window[cb]; } catch (e) {} if (s.parentNode) s.parentNode.removeChild(s); }
+      window[cb] = (data) => {
+        cleanup();
+        if (data && data.error) reject(new Error(data.error.error_msg || 'ошибка VK'));
+        else resolve(data ? data.response : null);
+      };
+      s.onerror = () => { cleanup(); reject(new Error('VK недоступен')); };
+      s.src = 'https://api.vk.com/method/groups.getById?' + params + '&callback=' + cb;
+      document.body.appendChild(s);
+    });
+  }
+
+  async function refreshVK() {
+    const cfg = getApi();
+    if (!cfg.vkToken || !cfg.vkGroup) {
+      setSource('vkSource', 'Нужен сервисный токен VK. Нажмите «Настроить API».');
+      openSettings();
+      return;
+    }
+    setSource('vkSource', 'Обновляю из VK…');
+    try {
+      const params = 'group_id=' + encodeURIComponent(cfg.vkGroup) + '&fields=members_count,counters&access_token=' + encodeURIComponent(cfg.vkToken) + '&v=5.199';
+      const resp = await vkJsonp(params);
+      const g = Array.isArray(resp) ? resp[0] : resp;
+      if (!g) throw new Error('нет данных');
+      document.getElementById('vkSubs').textContent = fmt(g.members_count);
+      if (g.counters && g.counters.videos != null) document.getElementById('vkVideos').textContent = fmt(g.counters.videos);
+      localStorage.setItem('vkCache', JSON.stringify({ subs: g.members_count, videos: g.counters ? g.counters.videos : null, at: nowText() }));
+      setSource('vkSource', 'Обновлено ' + nowText() + ' · VK API · часы — из Studio');
+    } catch (e) {
+      setSource('vkSource', 'Не удалось обновить: ' + e.message + '. Показаны последние данные.');
+    }
+  }
+
+  function openSettings() {
+    const c = getApi();
+    openSheet('Настройки', 'API для статистики', `
+      <div class="hint">Ключи хранятся только в этом браузере и не публикуются в репозитории.</div>
+      <div class="cfg-row"><label>YouTube API key</label><input id="cfgYtKey" value="${c.ytKey || ''}" placeholder="AIza..."></div>
+      <div class="cfg-row"><label>YouTube channel ID</label><input id="cfgYtId" value="${c.ytId || 'UC-z4uwWyV93tZRdMpXpK4yA'}"></div>
+      <div class="cfg-row"><label>VK service token</label><input id="cfgVkToken" value="${c.vkToken || ''}" placeholder="vk1.a..."></div>
+      <div class="cfg-row"><label>VK group id</label><input id="cfgVkGroup" value="${c.vkGroup || 'familytraveli'}"></div>
+      <div class="hint">YouTube: Google Cloud → включить YouTube Data API v3 → Credentials → API key, ограничить по referrer <b>olegsgusts-hub.github.io</b>.<br>VK: Сообщество → Управление → API → создать сервисный токен.</div>
+      <button class="refresh" id="cfgSave" type="button">Сохранить</button>`);
+    document.getElementById('cfgSave').addEventListener('click', () => {
+      const v = {
+        ytKey: document.getElementById('cfgYtKey').value.trim(),
+        ytId: document.getElementById('cfgYtId').value.trim(),
+        vkToken: document.getElementById('cfgVkToken').value.trim(),
+        vkGroup: document.getElementById('cfgVkGroup').value.trim()
+      };
+      saveApi(v);
+      closeSheet();
+      setSource('ytSource', 'Ключ сохранён. Нажмите «Обновить с YouTube».');
+      setSource('vkSource', 'Токен сохранён. Нажмите «Обновить из VK».');
+    });
+  }
+
+  /* ---------- рекламодатели ---------- */
+  const AD_STATUS = { new: 'Не отправлено', work: 'Взяли в работу', waiting: 'Написали, ждём', refused: 'Отказ', agreed: 'Договорились' };
+  const ADS_KEY = 'adsStateV1';
+  let ADS = [];
+  let ADS_STATE = {};
+
+  function saveAdsState() { try { localStorage.setItem(ADS_KEY, JSON.stringify(ADS_STATE)); } catch (e) {} }
+  function adState(id) {
+    if (!ADS_STATE[id]) ADS_STATE[id] = { status: (ADS.find(a => a.id === id) || {}).status || 'new', history: [] };
+    return ADS_STATE[id];
+  }
+  function histDate(iso) { try { return new Date(iso).toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } }
+
+  function renderAds() {
+    const list = document.getElementById('adsList');
+    const summary = document.getElementById('adsSummary');
+    if (!list) return;
+    if (!ADS.length) {
+      list.innerHTML = '<div class="card"><div class="muted">Не удалось загрузить список. Проверьте ads.json.</div></div>';
+      return;
+    }
+    const counts = { new: 0, work: 0, waiting: 0, refused: 0, agreed: 0 };
+    ADS.forEach(a => { counts[adState(a.id).status] = (counts[adState(a.id).status] || 0) + 1; });
+    summary.innerHTML = Object.entries(AD_STATUS).map(([k, v]) => `<span class="ads-pill ${k}">${v}: ${counts[k] || 0}</span>`).join('');
+    list.innerHTML = ADS.map(a => {
+      const st = adState(a.id);
+      const last = st.history.length ? st.history[st.history.length - 1] : null;
+      return `<div class="ad-card" data-id="${a.id}" data-status="${st.status}">
+        <div class="ad-top"><div class="ad-name">${a.name}</div><span class="ad-status ${st.status}">${AD_STATUS[st.status]}</span></div>
+        <div class="ad-meta">${a.category} · ${a.probability} вероятность</div>
+        <div class="ad-contact">${a.contact || ''}${a.email ? ' · ' + a.email : ''}</div>
+        <div class="ad-note">${last ? histDate(last.at) + ' — ' + (last.text || AD_STATUS[last.status]) : 'Когда писать: ' + a.bestTime}</div>
+      </div>`;
+    }).join('');
+    list.querySelectorAll('.ad-card').forEach(card => card.addEventListener('click', () => openAd(card.dataset.id)));
+  }
+
+  function openAd(id) {
+    const a = ADS.find(x => x.id === id);
+    if (!a) return;
+    const st = adState(id);
+    const contacts = [];
+    if (a.contactUrl) contacts.push(`<a class="link-btn" href="${a.contactUrl}" target="_blank" rel="noopener">${a.contact || 'Контакт'}</a>`);
+    if (a.email) contacts.push(`<a class="link-btn" href="mailto:${a.email}">${a.email}</a>`);
+    if (a.site) contacts.push(`<a class="link-btn" href="${a.site}" target="_blank" rel="noopener">Сайт</a>`);
+    const buttons = Object.entries(AD_STATUS).map(([k, v]) => `<button type="button" data-s="${k}" class="${st.status === k ? 'active' : ''}">${v}</button>`).join('');
+    const history = st.history.slice().reverse().map(h => `<div><b>${histDate(h.at)}</b> — ${h.text || AD_STATUS[h.status]}</div>`).join('') || '<div>Пока нет действий</div>';
+    openSheet('Рекламодатель', a.name, `
+      <div class="meta"><span>${a.category}</span><span>${a.probability} вероятность</span><span>${a.bestTime}</span></div>
+      <p><b>Почему:</b> ${a.why}</p>
+      <p><b>Контакты:</b></p>
+      <div class="link-row">${contacts.join('')}</div>
+      <p><b>Что предложить:</b> ${a.pitch}</p>
+      <div class="hint">Источник: ${a.source}</div>
+      <p><b>Статус:</b></p>
+      <div class="status-btns">${buttons}</div>
+      <textarea class="note" id="adNote" placeholder="Заметка: что ответили, о чём договорились, когда напомнить…"></textarea>
+      <button class="refresh ghost" id="adNoteSave" type="button">Сохранить заметку</button>
+      <div class="history"><b>История</b>${history}</div>`);
+    sBody.querySelectorAll('[data-s]').forEach(btn => btn.addEventListener('click', () => setAdStatus(id, btn.dataset.s)));
+    document.getElementById('adNoteSave').addEventListener('click', () => {
+      const note = document.getElementById('adNote').value.trim();
+      if (!note) return;
+      st.history.push({ at: new Date().toISOString(), text: 'Заметка: ' + note });
+      saveAdsState();
+      renderAds();
+      openAd(id);
+    });
+  }
+
+  function setAdStatus(id, status) {
+    const st = adState(id);
+    if (st.status === status) return;
+    st.status = status;
+    st.history.push({ at: new Date().toISOString(), status: status, text: 'Статус: ' + AD_STATUS[status] });
+    saveAdsState();
+    renderAds();
+    openAd(id);
+  }
+
+  function exportAds() {
+    const blob = new Blob([JSON.stringify(ADS_STATE, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'ads-history.json';
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 3000);
+  }
+
+  async function loadAds() {
+    try {
+      const r = await fetch('ads.json?t=' + Date.now(), { cache: 'no-store' });
+      if (r.ok) ADS = await r.json();
+    } catch (e) {}
+    try { ADS_STATE = JSON.parse(localStorage.getItem(ADS_KEY) || '{}'); } catch (e) { ADS_STATE = {}; }
+    renderAds();
+  }
+
+  document.getElementById('ytRefresh').addEventListener('click', refreshYT);
+  document.getElementById('vkRefresh').addEventListener('click', refreshVK);
+  document.querySelectorAll('.api-cfg').forEach(b => b.addEventListener('click', openSettings));
+  document.getElementById('adsExport').addEventListener('click', exportAds);
+  loadStats();
+  loadAds();
+
   const initial = location.hash.replace('#', '');
   if (initial && D[initial]) setTimeout(() => openDetail(initial), 150);
+  else if (initial) {
+    const tab = document.querySelector('.tab[data-tab="' + initial + '"]');
+    if (tab) setTimeout(() => tab.click(), 100);
+  }
 </script>
 </body>
 </html>
