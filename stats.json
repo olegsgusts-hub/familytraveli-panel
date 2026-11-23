@@ -1,0 +1,19 @@
+{
+  "youtube": {
+    "subscribers": 2290,
+    "views": null,
+    "videos": 83,
+    "watchHours": 2190,
+    "shortsViews90d": null,
+    "updated": "2026-11-23",
+    "note": "Часы и Shorts — из YouTube Studio, публично не отдаются"
+  },
+  "vk": {
+    "subscribers": 2483,
+    "views": null,
+    "videos": null,
+    "watchHours90d": 2160,
+    "updated": "2026-11-23",
+    "note": "Часы за 90 дней — из VK Studio"
+  }
+}
