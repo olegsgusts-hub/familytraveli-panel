@@ -6,7 +6,7 @@
     "watchHours": 11140,
     "shortsViews90d": 1423179,
     "updated": "2026-11-24",
-    "note": "Часы и Shorts — из YouTube Studio, публично не отдаются"
+    "note": "Часы и Shorts — по OAuth, обновляются каждые 30 минут"
   },
   "vk": {
     "subscribers": 2483,
