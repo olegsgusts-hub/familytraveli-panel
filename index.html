@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="sand">
+<html lang="ru" data-theme="flow">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -68,6 +68,10 @@
     background-size:180% 180%,180% 180%,250% 250%;
     animation:flowBg 12s ease-in-out infinite;
   }
+  [data-theme="flow"] .card,
+  [data-theme="flow"] .metric,
+  [data-theme="flow"] .tab{background:rgba(255,255,255,.80);backdrop-filter:blur(8px)}
+  [data-theme="flow"] .task{background:linear-gradient(155deg,rgba(255,243,214,.92),rgba(255,255,255,.84) 70%)}
   @keyframes flowBg{
     0%{background-position:0% 0%,100% 0%,0% 50%}
     50%{background-position:100% 40%,0% 45%,100% 50%}
@@ -397,18 +401,18 @@
     clean: { name:'Чистый', desc:'белый · графит · коралл', bg:'#F4F6F9', accent:'#FF6B4A', text:'#14181D' },
     flow:  { name:'Перелив', desc:'солнце ↔ мята · живой градиент', bg:'#FFF9EC', accent:'#2FA37C', text:'#26301F' }
   };
-  let currentTheme = 'sand';
+  let currentTheme = 'flow';
 
   function applyTheme(key, persist) {
-    if (!THEMES[key]) key = 'sand';
+    if (!THEMES[key]) key = 'flow';
     currentTheme = key;
     document.documentElement.dataset.theme = key;
-    if (persist !== false) { try { localStorage.setItem('panelTheme', key); } catch (e) {} }
+    if (persist !== false) { try { localStorage.setItem('panelThemeV2', key); } catch (e) {} }
   }
 
   const params = new URLSearchParams(location.search);
-  const saved = (() => { try { return localStorage.getItem('panelTheme'); } catch (e) { return null; } })();
-  applyTheme(params.get('theme') || saved || 'sand', false);
+  const saved = (() => { try { return localStorage.getItem('panelThemeV2'); } catch (e) { return null; } })();
+  applyTheme(params.get('theme') || saved || 'flow', false);
 
   let JOKES = [
     'Сегодня снимаем в тапках. Это не лень, это продакшн-решение.',
