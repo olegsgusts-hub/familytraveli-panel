@@ -133,7 +133,7 @@
   .tab.active{color:var(--accent-ink);background:linear-gradient(120deg,var(--accent),var(--accent2));
     border-color:transparent;box-shadow:0 8px 18px rgba(0,0,0,.10)}
   main{padding:0 14px}
-  .panel{display:none;animation:fade .25s ease}
+  .panel{display:none}
   .panel.active{display:block}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
   /* карточки */
@@ -185,12 +185,11 @@
   /* шторка */
   .sheet{position:fixed;inset:0;z-index:100;display:none}
   .sheet.open{display:block}
-  .sheet-backdrop{position:absolute;inset:0;background:rgba(20,24,28,.38);backdrop-filter:blur(3px);
-    animation:fade .2s ease}
+  .sheet-backdrop{position:absolute;inset:0;background:rgba(20,24,28,.38);backdrop-filter:blur(3px)}
   .sheet-card{position:absolute;left:0;right:0;bottom:0;max-width:480px;margin:0 auto;
     max-height:88vh;overflow:auto;background:var(--surface);border:1px solid var(--line);
     border-bottom:0;border-radius:24px 24px 0 0;padding:18px 18px calc(26px + env(safe-area-inset-bottom));
-    box-shadow:0 -20px 60px rgba(0,0,0,.25);animation:up .25s ease}
+    box-shadow:0 -20px 60px rgba(0,0,0,.25)}
   @keyframes up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
   .sheet-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
   .sheet-kicker{font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);font-weight:800}
@@ -226,7 +225,7 @@
   /* вкладки-скролл и бренды */
   .tabs.scroll{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;padding-bottom:8px}
   .tabs.scroll::-webkit-scrollbar{display:none}
-  .tabs.scroll .tab{flex:0 0 auto;display:flex;align-items:center;gap:5px;padding:9px 11px;font-size:12.5px}
+  .tabs.scroll .tab{flex:0 0 auto;display:flex;align-items:center;gap:4px;padding:9px 8px;font-size:12px}
   .tabs .tab .logo{width:16px;height:16px;flex:none;display:block}
   .tabs .tab.yt.active{background:linear-gradient(120deg,#FF0000,#FF4D4D);color:#fff;border-color:transparent}
   .tabs .tab.vk.active{background:linear-gradient(120deg,#0077FF,#4DA3FF);color:#fff;border-color:transparent}
@@ -1048,11 +1047,9 @@
   loadAds();
 
   const initial = location.hash.replace('#', '');
-  if (initial && D[initial]) setTimeout(() => openDetail(initial), 150);
-  else if (initial) {
-    const tab = document.querySelector('.tab[data-tab="' + initial + '"]');
-    if (tab) setTimeout(() => tab.click(), 100);
-  }
+  const initialTab = document.querySelector('.tab[data-tab="' + initial + '"]');
+  if (initialTab) setTimeout(() => initialTab.click(), 100);
+  else if (initial && D[initial]) setTimeout(() => openDetail(initial), 150);
 </script>
 </body>
 </html>
