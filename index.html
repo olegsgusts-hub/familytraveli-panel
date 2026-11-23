@@ -1155,7 +1155,10 @@
       if (ADS.length) {
         const t = document.querySelector('.tab[data-tab="ads"]');
         if (t) t.click();
-        setTimeout(() => openAd(adId), 120);
+        setTimeout(() => {
+          try { openAd(adId); }
+          catch (e) { openSheet('Ошибка', 'Карточка не открылась', '<p>' + e.message + '</p>'); }
+        }, 120);
       } else if (adTries++ < 15) {
         setTimeout(openByHash, 300);
       }
