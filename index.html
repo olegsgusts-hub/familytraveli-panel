@@ -51,6 +51,39 @@
     --chip:#F2F4F7; --chip-text:#505A66;
     --shadow:0 10px 30px rgba(20,24,29,.08);
   }
+  [data-theme="flow"]{
+    --bg:#FFF9EC; --surface:#FFFFFF; --surface2:#F7FBF8;
+    --text:#26301F; --muted:#6E7A63; --line:#E4E8D4;
+    --accent:#E8A33D; --accent2:#2FA37C; --accent-ink:#1E2A1C;
+    --accent-soft:#FFF3D6; --accent-line:#D5E6C8;
+    --ok:#2FA37C; --warn:#D98A1C;
+    --chip:#F5F3E2; --chip-text:#5F6A4E;
+    --shadow:0 10px 30px rgba(38,48,31,.08);
+  }
+  [data-theme="flow"] .app{
+    background:
+      radial-gradient(60% 45% at 10% 0%, rgba(242,160,7,.32), transparent 60%),
+      radial-gradient(60% 45% at 90% 12%, rgba(47,163,124,.26), transparent 60%),
+      linear-gradient(135deg,#FFF8E7 0%,#F2FBF7 48%,#FFF8E7 100%);
+    background-size:160% 160%,160% 160%,220% 220%;
+    animation:flowBg 18s ease-in-out infinite;
+  }
+  @keyframes flowBg{
+    0%{background-position:0% 0%,100% 0%,0% 50%}
+    50%{background-position:100% 25%,0% 35%,100% 50%}
+    100%{background-position:0% 0%,100% 0%,0% 50%}
+  }
+  [data-theme="flow"] .tab.active,
+  [data-theme="flow"] .cta{
+    background:linear-gradient(120deg,#F2A007,#F7C948,#7BC9A8,#2FA37C,#F2A007);
+    background-size:300% 100%;
+    animation:flowAccent 9s linear infinite;
+    color:#18251C;
+  }
+  @keyframes flowAccent{to{background-position:300% 0}}
+  @media (prefers-reduced-motion: reduce){
+    [data-theme="flow"] .app,[data-theme="flow"] .tab.active,[data-theme="flow"] .cta{animation:none}
+  }
   *{box-sizing:border-box}
   .ico,.theme-btn,#jokeBtn{font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji","Segoe UI Symbol",sans-serif}
   html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
@@ -80,18 +113,18 @@
     color:#fff;font-size:18px;cursor:pointer;display:grid;place-items:center}
   /* дата */
   .datebar{display:flex;justify-content:space-between;align-items:center;padding:14px 18px 8px;
-    font-size:12.5px;color:var(--muted);gap:8px}
+    font-size:13.5px;color:var(--muted);gap:8px}
   .datebar b{color:var(--text);font-weight:700}
   /* шутка дня */
   .notice{margin:0 14px 12px;padding:11px 12px;border-radius:14px;display:flex;gap:8px;align-items:flex-start;
     background:var(--accent-soft);border:1px solid var(--accent-line)}
-  .notice .joke{flex:1;font-size:13px;line-height:1.45;color:var(--text)}
+  .notice .joke{flex:1;font-size:14.5px;line-height:1.5;color:var(--text)}
   .notice button{border:0;background:rgba(0,0,0,.05);color:var(--text);border-radius:9px;
     width:28px;height:28px;font-size:14px;cursor:pointer;flex:none}
   /* табы */
   .tabs{position:sticky;top:0;z-index:5;display:flex;gap:6px;padding:6px 12px 10px;
     background:linear-gradient(180deg,var(--bg) 70%,transparent)}
-  .tab{flex:1;border:1px solid var(--line);cursor:pointer;padding:10px 6px;border-radius:13px;font-size:13.5px;
+  .tab{flex:1;border:1px solid var(--line);cursor:pointer;padding:11px 6px;border-radius:13px;font-size:14.5px;
     font-weight:700;color:var(--muted);background:var(--surface);transition:.18s}
   .tab.active{color:var(--accent-ink);background:linear-gradient(120deg,var(--accent),var(--accent2));
     border-color:transparent;box-shadow:0 8px 18px rgba(0,0,0,.10)}
@@ -109,18 +142,18 @@
   .task{background:linear-gradient(155deg,var(--accent-soft),var(--surface) 70%);border-color:var(--accent-line)}
   .kicker{font-size:10.5px;letter-spacing:1.7px;text-transform:uppercase;color:var(--accent);font-weight:800}
   h2{font-size:20px;line-height:1.28;margin:9px 0 9px;font-weight:800;padding-right:16px;color:var(--text)}
-  .muted{color:var(--muted);font-size:14px;line-height:1.55}
+  .muted{color:var(--muted);font-size:16.5px;line-height:1.55}
   .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
-  .chip{font-size:11.5px;padding:6px 11px;border-radius:99px;background:var(--chip);
+  .chip{font-size:12.5px;padding:6px 11px;border-radius:99px;background:var(--chip);
     border:1px solid var(--line);color:var(--chip-text);font-weight:600}
   .chip.hot{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-  .card h3{font-size:15px;margin:0 0 9px;font-weight:800;padding-right:18px;color:var(--text)}
+  .card h3{font-size:16.5px;margin:0 0 9px;font-weight:800;padding-right:18px;color:var(--text)}
   .row{display:flex;gap:11px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line)}
   .row:first-of-type{border-top:0;padding-top:0}
   .row .ico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:16px;
     background:var(--surface2);border:1px solid var(--line);flex:none}
-  .row .t{font-size:14.5px;line-height:1.45;padding-right:8px;color:var(--text)}
-  .row .t small{display:block;color:var(--muted);font-size:12.5px;margin-top:3px;line-height:1.4}
+  .row .t{font-size:16.5px;line-height:1.45;padding-right:8px;color:var(--text)}
+  .row .t small{display:block;color:var(--muted);font-size:13.5px;margin-top:3px;line-height:1.45}
   .day{font-size:11px;font-weight:800;letter-spacing:.6px;color:var(--accent);text-transform:uppercase}
   /* цифры */
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:11px}
@@ -136,7 +169,7 @@
   .ok .bar i{width:100%;background:var(--ok)}
   .warn .bar i{width:55%;background:var(--warn)}
   .viral .bar i{width:88%;background:linear-gradient(90deg,var(--accent),var(--accent2))}
-  .verdict{font-size:14px;line-height:1.55;color:var(--text);background:var(--accent-soft);
+  .verdict{font-size:16px;line-height:1.55;color:var(--text);background:var(--accent-soft);
     border:1px solid var(--accent-line);border-radius:17px;padding:14px;margin-bottom:11px;cursor:pointer}
   .verdict b{color:var(--accent)}
   .footer{padding:7px 14px 0}
@@ -160,16 +193,16 @@
   .sheet-close{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--surface2);
     color:var(--text);font-size:16px;cursor:pointer;flex:none}
   .sheet h2{font-size:22px;margin:6px 0 12px;padding-right:0;color:var(--text)}
-  .sheet-body{font-size:15.5px;line-height:1.62;color:var(--text)}
+  .sheet-body{font-size:17.5px;line-height:1.62;color:var(--text)}
   .sheet-body p{margin:0 0 11px}
   .sheet-body ul{margin:0 0 13px;padding-left:20px}
   .sheet-body li{margin-bottom:7px}
   .sheet-body b{color:var(--text);font-weight:800}
   .sheet-body .accent{color:var(--accent);font-weight:700}
   .sheet-body .humor{background:var(--accent-soft);border:1px solid var(--accent-line);
-    border-radius:13px;padding:11px 13px;font-size:13.5px;color:var(--text);margin-top:13px}
+    border-radius:13px;padding:11px 13px;font-size:15px;color:var(--text);margin-top:13px}
   .sheet-body .meta{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 13px}
-  .sheet-body .meta span{font-size:11px;padding:5px 10px;border-radius:99px;background:var(--surface2);
+  .sheet-body .meta span{font-size:12px;padding:5px 10px;border-radius:99px;background:var(--surface2);
     border:1px solid var(--line);color:var(--muted);font-weight:600}
   /* выбор темы */
   .theme-row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;
@@ -361,7 +394,8 @@
     sea:   { name:'Море',   desc:'прохладный голубой · синий', bg:'#EEF6FB', accent:'#1F7AA8', text:'#17324A' },
     sun:   { name:'Солнце', desc:'светло-жёлтый · янтарный', bg:'#FFF7E6', accent:'#F2A007', text:'#3A2E14' },
     mint:  { name:'Мята',   desc:'свежий зелёный · изумруд', bg:'#EFF8F4', accent:'#2FA37C', text:'#1E3A31' },
-    clean: { name:'Чистый', desc:'белый · графит · коралл', bg:'#F4F6F9', accent:'#FF6B4A', text:'#14181D' }
+    clean: { name:'Чистый', desc:'белый · графит · коралл', bg:'#F4F6F9', accent:'#FF6B4A', text:'#14181D' },
+    flow:  { name:'Перелив', desc:'солнце ↔ мята · живой градиент', bg:'#FFF9EC', accent:'#2FA37C', text:'#26301F' }
   };
   let currentTheme = 'sand';
 
@@ -376,33 +410,43 @@
   const saved = (() => { try { return localStorage.getItem('panelTheme'); } catch (e) { return null; } })();
   applyTheme(params.get('theme') || saved || 'sand', false);
 
-  const JOKES = [
+  let JOKES = [
     'Сегодня снимаем в тапках. Это не лень, это продакшн-решение.',
-    'Выезды отменяются: наша съёмочная площадка — кухня.',
-    'Бюджет: один телефон и остатки печенья.',
     'Соседи не в курсе, что они массовка.',
-    'План такой: снять шедевр до того, как Настя найдёт мамин телефон.',
-    'Сегодня в кадре: диван, чемодан и лёгкая паника.',
-    'Мы не снимаем в аэропорту. Аэропорт снимает нас.',
-    'Домашняя студия: свет — окно, звук — сосед с перфоратором.',
     'Смета: 0 ₽. Амбиции: 1 000 000 просмотров.',
-    'Если что, это был творческий беспорядок, а не бардак.',
-    'Сценарий готов. Осталось уговорить Настю.',
-    'Снимаем быстро: пока Настя не передумала быть звездой.',
-    'Сегодня без выездов — экономим силы на монтаж.',
-    'Наш продакшн-план: снять, смонтировать, переснять.',
-    'Больше света, меньше драмы. Драму оставим для сценария.',
-    'Камера — телефон. Осветитель — солнце. Гримёр — Настя.',
     'Мы не опаздываем. Мы создаём напряжение.',
-    'В кадре только семья. И немного соседского кота.'
+    'Камера — телефон. Осветитель — солнце. Гримёр — Настя.',
+    'План такой: снять шедевр до того, как Настя найдёт мамин телефон.',
+    'Домашняя студия: свет — окно, звук — сосед с перфоратором.',
+    'Если что, это был творческий беспорядок, а не бардак.'
   ];
   const jokeEl = document.getElementById('joke');
+  let lastJoke = jokeEl.textContent;
+  try { lastJoke = sessionStorage.getItem('lastJoke') || lastJoke; } catch (e) {}
+
   function rollJoke() {
+    if (!JOKES.length) return;
     let i = Math.floor(Math.random() * JOKES.length);
-    if (jokeEl.textContent === JOKES[i]) i = (i + 1) % JOKES.length;
-    jokeEl.textContent = JOKES[i];
+    let guard = 0;
+    while (JOKES[i] === lastJoke && JOKES.length > 1 && guard++ < 10) {
+      i = Math.floor(Math.random() * JOKES.length);
+    }
+    lastJoke = JOKES[i];
+    jokeEl.textContent = lastJoke;
+    try { sessionStorage.setItem('lastJoke', lastJoke); } catch (e) {}
   }
+
+  async function loadJokes() {
+    try {
+      const res = await fetch('jokes.json?t=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) return;
+      const arr = await res.json();
+      if (Array.isArray(arr) && arr.length) { JOKES = arr; rollJoke(); }
+    } catch (e) {}
+  }
+
   document.getElementById('jokeBtn').addEventListener('click', (e) => { e.stopPropagation(); rollJoke(); });
+  loadJokes();
 
   const D = {
     task: {
