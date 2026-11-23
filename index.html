@@ -289,6 +289,14 @@
   .cfg-row label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:5px}
   .cfg-row input{width:100%;padding:11px;border:1px solid var(--line);border-radius:11px;background:var(--surface2);color:var(--text);font:inherit;font-size:14px}
   .hint{font-size:11.5px;color:var(--muted);line-height:1.45;margin:8px 0}
+  .ads-filters{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin-bottom:8px;scrollbar-width:none}
+  .ads-filters::-webkit-scrollbar{display:none}
+  .filter-btn{flex:0 0 auto;font-size:11.5px;font-weight:700;padding:7px 11px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
+  .filter-btn.active{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+  .ad-photo{width:100%;height:150px;object-fit:cover;border-radius:13px;margin-bottom:10px;background:var(--surface2);display:block}
+  .sheet-photo{width:100%;height:180px;object-fit:cover;border-radius:14px;margin-bottom:12px;background:var(--surface2);display:block}
+  .history-tools{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+  .history-tools button{font-size:12px;font-weight:700;padding:9px 11px;border-radius:10px;border:1px solid var(--line);background:var(--surface2);color:var(--text);cursor:pointer}
 </style>
 </head>
 <body>
@@ -510,8 +518,10 @@
         </div>
         <div><h2>Реклама</h2><p>5 проверенных + 2 в поиске</p></div>
       </div>
+      <div class="ads-filters" id="adsFilters"></div>
       <div class="ads-summary" id="adsSummary"></div>
       <div id="adsList"></div>
+      <button class="refresh ghost" id="adsHistory" type="button">История всех действий</button>
       <button class="refresh ghost" id="adsExport" type="button">Экспорт истории в JSON</button>
       <div class="source">Статусы, заметки и история хранятся в этом браузере. Экспорт — чтобы не потерять.</div>
       <div class="card">
@@ -857,8 +867,8 @@
   async function refreshYT() {
     const cfg = getApi();
     if (!cfg.ytKey || !cfg.ytId) {
-      setSource('ytSource', 'Нужен API-ключ. Нажмите «Настроить API».');
-      openSettings();
+      await loadStats();
+      setSource('ytSource', 'Данные с сервера на ' + nowText() + '. Для live-цифр добавьте API-ключ.');
       return;
     }
     setSource('ytSource', 'Обновляю с YouTube…');
@@ -898,8 +908,8 @@
   async function refreshVK() {
     const cfg = getApi();
     if (!cfg.vkToken || !cfg.vkGroup) {
-      setSource('vkSource', 'Нужен сервисный токен VK. Нажмите «Настроить API».');
-      openSettings();
+      await loadStats();
+      setSource('vkSource', 'Данные с сервера на ' + nowText() + '. Для live-цифр добавьте токен VK.');
       return;
     }
     setSource('vkSource', 'Обновляю из VK…');
@@ -954,6 +964,20 @@
   }
   function histDate(iso) { try { return new Date(iso).toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } }
 
+  const REGIONS = ['Все', 'Краснодарский край', 'Турция', 'Египет', 'ОАЭ', 'Грузия', 'Москва', 'Онлайн'];
+  let adsFilter = 'Все';
+
+  function renderFilters() {
+    const box = document.getElementById('adsFilters');
+    if (!box) return;
+    box.innerHTML = REGIONS.map(r => `<button class="filter-btn ${adsFilter === r ? 'active' : ''}" data-r="${r}">${r}</button>`).join('');
+    box.querySelectorAll('[data-r]').forEach(b => b.addEventListener('click', () => {
+      adsFilter = b.dataset.r;
+      renderFilters();
+      renderAds();
+    }));
+  }
+
   function renderAds() {
     const list = document.getElementById('adsList');
     const summary = document.getElementById('adsSummary');
@@ -965,12 +989,18 @@
     const counts = { new: 0, work: 0, waiting: 0, refused: 0, agreed: 0 };
     ADS.forEach(a => { counts[adState(a.id).status] = (counts[adState(a.id).status] || 0) + 1; });
     summary.innerHTML = Object.entries(AD_STATUS).map(([k, v]) => `<span class="ads-pill ${k}">${v}: ${counts[k] || 0}</span>`).join('');
-    list.innerHTML = ADS.map(a => {
+    const items = ADS.filter(a => adsFilter === 'Все' || a.region === adsFilter);
+    if (!items.length) {
+      list.innerHTML = '<div class="card"><div class="muted">В этом регионе пока нет лидов. Добавим в следующей итерации.</div></div>';
+      return;
+    }
+    list.innerHTML = items.map(a => {
       const st = adState(a.id);
       const last = st.history.length ? st.history[st.history.length - 1] : null;
       return `<div class="ad-card" data-id="${a.id}" data-status="${st.status}">
+        ${a.image ? `<img class="ad-photo" src="${a.image}" alt="${a.name}" loading="lazy">` : ''}
         <div class="ad-top"><div class="ad-name">${a.name}</div><span class="ad-status ${st.status}">${AD_STATUS[st.status]}</span></div>
-        <div class="ad-meta">${a.category} · ${a.probability} вероятность</div>
+        <div class="ad-meta">${a.category} · ${a.region} · ${a.probability} вероятность</div>
         <div class="ad-contact">${a.contact || ''}${a.email ? ' · ' + a.email : ''}</div>
         <div class="ad-note">${last ? histDate(last.at) + ' — ' + (last.text || AD_STATUS[last.status]) : 'Когда писать: ' + a.bestTime}</div>
       </div>`;
@@ -978,28 +1008,54 @@
     list.querySelectorAll('.ad-card').forEach(card => card.addEventListener('click', () => openAd(card.dataset.id)));
   }
 
+  function historyRows(st) {
+    return st.history.slice().reverse().map(h => `<div><b>${histDate(h.at)}</b> — ${h.text || AD_STATUS[h.status]}</div>`).join('') || '<div>Пока нет действий</div>';
+  }
+
+  function downloadWord(filename, title, body) {
+    const html = `<html><head><meta charset="utf-8"><title>${title}</title></head><body><h1>${title}</h1>${body}</body></html>`;
+    const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename + '.doc';
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  }
+
+  function printPdf(title, body) {
+    const w = window.open('', '_blank');
+    if (!w) { alert('Разрешите всплывающие окна или скачайте Word.'); return; }
+    w.document.write(`<html><head><meta charset="utf-8"><title>${title}</title><style>body{font-family:Arial,sans-serif;padding:24px;font-size:14px;line-height:1.5}h1{font-size:20px}h2{font-size:16px}div{margin-bottom:8px}</style></head><body><h1>${title}</h1>${body}</body></html>`);
+    w.document.close();
+    w.focus();
+    setTimeout(() => w.print(), 500);
+  }
+
   function openAd(id) {
     const a = ADS.find(x => x.id === id);
     if (!a) return;
     const st = adState(id);
-    const contacts = [];
-    if (a.contactUrl) contacts.push(`<a class="link-btn" href="${a.contactUrl}" target="_blank" rel="noopener">${a.contact || 'Контакт'}</a>`);
-    if (a.email) contacts.push(`<a class="link-btn" href="mailto:${a.email}">${a.email}</a>`);
-    if (a.site) contacts.push(`<a class="link-btn" href="${a.site}" target="_blank" rel="noopener">Сайт</a>`);
+    const links = (a.links && a.links.length ? a.links : []).map(l => `<a class="link-btn" href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join('');
+    if (a.email) links += `<a class="link-btn" href="mailto:${a.email}">${a.email}</a>`;
     const buttons = Object.entries(AD_STATUS).map(([k, v]) => `<button type="button" data-s="${k}" class="${st.status === k ? 'active' : ''}">${v}</button>`).join('');
-    const history = st.history.slice().reverse().map(h => `<div><b>${histDate(h.at)}</b> — ${h.text || AD_STATUS[h.status]}</div>`).join('') || '<div>Пока нет действий</div>';
+    const history = historyRows(st);
     openSheet('Рекламодатель', a.name, `
-      <div class="meta"><span>${a.category}</span><span>${a.probability} вероятность</span><span>${a.bestTime}</span></div>
+      ${a.image ? `<img class="sheet-photo" src="${a.image}" alt="${a.name}">` : ''}
+      <div class="meta"><span>${a.category}</span><span>${a.region}</span><span>${a.probability} вероятность</span><span>${a.bestTime}</span></div>
       <p><b>Почему:</b> ${a.why}</p>
-      <p><b>Контакты:</b></p>
-      <div class="link-row">${contacts.join('')}</div>
+      <p><b>Все ссылки и контакты:</b></p>
+      <div class="link-row">${links}</div>
       <p><b>Что предложить:</b> ${a.pitch}</p>
       <div class="hint">Источник: ${a.source}</div>
       <p><b>Статус:</b></p>
       <div class="status-btns">${buttons}</div>
       <textarea class="note" id="adNote" placeholder="Заметка: что ответили, о чём договорились, когда напомнить…"></textarea>
       <button class="refresh ghost" id="adNoteSave" type="button">Сохранить заметку</button>
-      <div class="history"><b>История</b>${history}</div>`);
+      <div class="history"><b>История</b>${history}</div>
+      <div class="history-tools">
+        <button id="adWord" type="button">Скачать Word</button>
+        <button id="adPdf" type="button">Скачать PDF</button>
+      </div>`);
     sBody.querySelectorAll('[data-s]').forEach(btn => btn.addEventListener('click', () => setAdStatus(id, btn.dataset.s)));
     document.getElementById('adNoteSave').addEventListener('click', () => {
       const note = document.getElementById('adNote').value.trim();
@@ -1009,6 +1065,30 @@
       renderAds();
       openAd(id);
     });
+    document.getElementById('adWord').addEventListener('click', () => {
+      downloadWord('ad-' + a.id, a.name, `<p>${a.category} · ${a.region}</p><div>${history}</div>`);
+    });
+    document.getElementById('adPdf').addEventListener('click', () => {
+      printPdf(a.name, `<p>${a.category} · ${a.region}</p><div>${history}</div>`);
+    });
+  }
+
+  function openHistory() {
+    const rows = [];
+    ADS.forEach(a => {
+      const st = adState(a.id);
+      st.history.forEach(h => rows.push({ ad: a.name, at: h.at, text: h.text || AD_STATUS[h.status] || '' }));
+    });
+    rows.sort((x, y) => new Date(y.at) - new Date(x.at));
+    const body = rows.length ? rows.map(r => `<div><b>${histDate(r.at)}</b> — ${r.ad}: ${r.text}</div>`).join('') : '<div>Пока нет действий</div>';
+    openSheet('История', 'Все действия по рекламе', `
+      <div class="history">${body}</div>
+      <div class="history-tools">
+        <button id="histWord" type="button">Скачать Word</button>
+        <button id="histPdf" type="button">Скачать PDF</button>
+      </div>`);
+    document.getElementById('histWord').addEventListener('click', () => downloadWord('ads-history', 'История по рекламе', `<div>${body}</div>`));
+    document.getElementById('histPdf').addEventListener('click', () => printPdf('История по рекламе', `<div>${body}</div>`));
   }
 
   function setAdStatus(id, status) {
@@ -1036,6 +1116,7 @@
       if (r.ok) ADS = await r.json();
     } catch (e) {}
     try { ADS_STATE = JSON.parse(localStorage.getItem(ADS_KEY) || '{}'); } catch (e) { ADS_STATE = {}; }
+    renderFilters();
     renderAds();
   }
 
@@ -1043,6 +1124,7 @@
   document.getElementById('vkRefresh').addEventListener('click', refreshVK);
   document.querySelectorAll('.api-cfg').forEach(b => b.addEventListener('click', openSettings));
   document.getElementById('adsExport').addEventListener('click', exportAds);
+  document.getElementById('adsHistory').addEventListener('click', openHistory);
   loadStats();
   loadAds();
 
