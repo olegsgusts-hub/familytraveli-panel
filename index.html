@@ -1035,7 +1035,7 @@
     const a = ADS.find(x => x.id === id);
     if (!a) return;
     const st = adState(id);
-    const links = (a.links && a.links.length ? a.links : []).map(l => `<a class="link-btn" href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join('');
+    let links = (a.links && a.links.length ? a.links : []).map(l => `<a class="link-btn" href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join('');
     if (a.email) links += `<a class="link-btn" href="mailto:${a.email}">${a.email}</a>`;
     const buttons = Object.entries(AD_STATUS).map(([k, v]) => `<button type="button" data-s="${k}" class="${st.status === k ? 'active' : ''}">${v}</button>`).join('');
     const history = historyRows(st);
