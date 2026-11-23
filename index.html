@@ -466,9 +466,9 @@
         <a class="open" href="https://www.youtube.com/@FamilyTraveli" target="_blank" rel="noopener">Открыть</a>
       </div>
       <div class="stat-grid">
-        <div class="stat"><span>Подписчики</span><b id="ytSubs">2 290</b><small>порог 1 000 пройден</small></div>
-        <div class="stat"><span>Просмотры</span><b id="ytViews">—</b><small>всего на канале</small></div>
-        <div class="stat"><span>Видео</span><b id="ytVideos">83</b><small>включая Shorts</small></div>
+        <div class="stat"><span>Подписчики</span><b id="ytSubs">2 300</b><small>порог 1 000 пройден</small></div>
+        <div class="stat"><span>Просмотры</span><b id="ytViews">1 497 755</b><small>всего на канале</small></div>
+        <div class="stat"><span>Видео</span><b id="ytVideos">82</b><small>включая Shorts</small></div>
         <div class="stat"><span>Часы за год</span><b id="ytHours">2 190</b><small>из Studio · порог 4 000</small></div>
       </div>
       <button class="refresh yt" id="ytRefresh">Обновить с YouTube</button>
@@ -834,7 +834,7 @@
       if (!r.ok) return;
       const s = await r.json();
       if (s.youtube) {
-        if (s.youtube.subscribers != null && !localStorage.getItem('ytCache')) document.getElementById('ytSubs').textContent = fmt(s.youtube.subscribers);
+        if (s.youtube.subscribers != null && !localStorage.getItem('ytCacheV2')) document.getElementById('ytSubs').textContent = fmt(s.youtube.subscribers);
         if (s.youtube.views != null) document.getElementById('ytViews').textContent = fmt(s.youtube.views);
         if (s.youtube.videos != null) document.getElementById('ytVideos').textContent = fmt(s.youtube.videos);
         if (s.youtube.watchHours != null) document.getElementById('ytHours').textContent = fmt(s.youtube.watchHours);
@@ -848,7 +848,7 @@
     } catch (e) {}
     ['yt', 'vk'].forEach(k => {
       try {
-        const c = JSON.parse(localStorage.getItem(k + 'Cache') || 'null');
+        const c = JSON.parse(localStorage.getItem(k === 'yt' ? 'ytCacheV2' : k + 'Cache') || 'null');
         if (!c) return;
         if (k === 'yt') {
           if (c.subs != null) document.getElementById('ytSubs').textContent = fmt(c.subs);
@@ -866,14 +866,14 @@
 
   async function refreshYT() {
     const cfg = getApi();
-    if (!cfg.ytKey || !cfg.ytId) {
+    if (!cfg.ytKey) {
       await loadStats();
       setSource('ytSource', 'Данные с сервера на ' + nowText() + '. Для live-цифр добавьте API-ключ.');
       return;
     }
     setSource('ytSource', 'Обновляю с YouTube…');
     try {
-      const url = 'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=' + encodeURIComponent(cfg.ytId) + '&key=' + encodeURIComponent(cfg.ytKey);
+      const url = 'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=' + encodeURIComponent('UCkrUv6Xizk-4aEOMJ-8-RKQ') + '&key=' + encodeURIComponent(cfg.ytKey);
       const r = await fetch(url);
       const j = await r.json();
       if (!j.items || !j.items[0]) throw new Error((j.error && j.error.message) || 'нет данных');
@@ -881,7 +881,7 @@
       document.getElementById('ytSubs').textContent = fmt(s.subscriberCount);
       document.getElementById('ytViews').textContent = fmt(s.viewCount);
       document.getElementById('ytVideos').textContent = fmt(s.videoCount);
-      localStorage.setItem('ytCache', JSON.stringify({ subs: s.subscriberCount, views: s.viewCount, videos: s.videoCount, at: nowText() }));
+      localStorage.setItem('ytCacheV2', JSON.stringify({ subs: s.subscriberCount, views: s.viewCount, videos: s.videoCount, at: nowText() }));
       setSource('ytSource', 'Обновлено ' + nowText() + ' · YouTube API · часы — из Studio');
     } catch (e) {
       setSource('ytSource', 'Не удалось обновить: ' + e.message + '. Показаны последние данные.');
@@ -932,7 +932,7 @@
     openSheet('Настройки', 'API для статистики', `
       <div class="hint">Ключи хранятся только в этом браузере и не публикуются в репозитории.</div>
       <div class="cfg-row"><label>YouTube API key</label><input id="cfgYtKey" value="${c.ytKey || ''}" placeholder="AIza..."></div>
-      <div class="cfg-row"><label>YouTube channel ID</label><input id="cfgYtId" value="${c.ytId || 'UC-z4uwWyV93tZRdMpXpK4yA'}"></div>
+      <div class="hint">Канал: @FamilyTraveli · ID зашит в панель, менять не нужно.</div>
       <div class="cfg-row"><label>VK service token</label><input id="cfgVkToken" value="${c.vkToken || ''}" placeholder="vk1.a..."></div>
       <div class="cfg-row"><label>VK group id</label><input id="cfgVkGroup" value="${c.vkGroup || 'familytraveli'}"></div>
       <div class="hint">YouTube: Google Cloud → включить YouTube Data API v3 → Credentials → API key, ограничить по referrer <b>olegsgusts-hub.github.io</b>.<br>VK: Сообщество → Управление → API → создать сервисный токен.</div>
@@ -940,7 +940,6 @@
     document.getElementById('cfgSave').addEventListener('click', () => {
       const v = {
         ytKey: document.getElementById('cfgYtKey').value.trim(),
-        ytId: document.getElementById('cfgYtId').value.trim(),
         vkToken: document.getElementById('cfgVkToken').value.trim(),
         vkGroup: document.getElementById('cfgVkGroup').value.trim()
       };
