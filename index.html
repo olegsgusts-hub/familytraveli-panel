@@ -1046,6 +1046,22 @@
   loadStats();
   loadAds();
 
+  const qp = new URLSearchParams(location.search);
+  if (qp.get('settings')) setTimeout(openSettings, 600);
+  if (qp.get('ad')) {
+    let tries = 0;
+    const tryOpen = () => {
+      if (ADS.length) {
+        const t = document.querySelector('.tab[data-tab="ads"]');
+        if (t) t.click();
+        setTimeout(() => openAd(qp.get('ad')), 120);
+      } else if (tries++ < 15) {
+        setTimeout(tryOpen, 300);
+      }
+    };
+    setTimeout(tryOpen, 300);
+  }
+
   const initial = location.hash.replace('#', '');
   const initialTab = document.querySelector('.tab[data-tab="' + initial + '"]');
   if (initialTab) setTimeout(() => initialTab.click(), 100);
